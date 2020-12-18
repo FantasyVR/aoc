@@ -12,7 +12,7 @@ def infix2postfix(expression):
             continue
         elif '0' <= expression[i] <= '9':  # operand -> post expression
             postExp.append(expression[i])
-        elif expression[i] in ['+', '-', '*', '/']:  # operator
+        elif expression[i] in ['+',  '*']:  # operator
             while len(stack) > 0 and stack[-1] != '(':
                 postExp.append(stack[-1])
                 stack = stack[:-1]
@@ -41,7 +41,7 @@ def infix2postfix2(expression):
             continue
         elif '0' <= expression[i] <= '9':  # operand -> post expression
             postExp.append(expression[i])
-        elif expression[i] in ['+', '-', '*', '/']:  # operator
+        elif expression[i] in ['+', '*']:  # operator
             while len(stack) > 0 and stack[-1] != '(' and precedence[expression[i]] <= precedence[stack[-1]]:
                 postExp.append(stack[-1])
                 stack = stack[:-1]
@@ -72,12 +72,8 @@ def evaluePostExp(postExp):
             re = 0
             if postExp[i] == '+':
                 re = a + b
-            elif postExp[i] == '-':
-                re = a - b
             elif postExp[i] == '*':
                 re = a * b
-            elif postExp[i] == '/':
-                re = a / b
             stack[-2] = re
             stack = stack[:-1]
     return stack[-1]
